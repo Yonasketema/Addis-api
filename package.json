@@ -1,0 +1,11 @@
+{
+  "name": "addis-api",
+  "version": "1.0.0",
+  "description": "Addis food & restaurant",
+  "main": "index.js",
+  "author": "yonas ketema",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
