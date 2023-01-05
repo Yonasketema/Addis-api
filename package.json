@@ -6,6 +6,11 @@
   "author": "yonas ketema",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^6.8.2"
+  },
+  "scripts":{
+    "start":"nodemon index.js"
   }
+
 }
