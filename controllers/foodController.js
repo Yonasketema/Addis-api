@@ -1,9 +1,11 @@
-const Food = require("../models/food");
-const Restaurant = require("../models/restaurant");
+const Food = require("../models/foodModel");
+const Restaurant = require("../models/restaurantModel");
 
 exports.postFood = async (req, res) => {
+  const { name, price, restaurant } = req.body;
+
   try {
-    const food = await Food.create(req.body);
+    const food = await Food.create({ name, price, restaurant });
 
     res.status(201).json({
       status: "success",
@@ -28,7 +30,7 @@ exports.getNearbyFood = async (req, res) => {
         $geoNear: {
           near: { type: "Point", coordinates: [+lat, +log] },
           distanceField: "dist",
-          maxDistance: 100,
+          maxDistance: 1500,
           key: "location",
           spherical: true,
         },
