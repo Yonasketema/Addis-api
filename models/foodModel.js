@@ -12,6 +12,10 @@ const foodSchema = new Schema({
     ref: "Restaurant",
     require: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
 });
 
 const Food = mongoose.model("Food", foodSchema);

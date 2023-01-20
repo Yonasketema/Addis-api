@@ -6,4 +6,5 @@ const router = express.Router();
 router.route("/").post(postFood);
 
 router.route("/nearby").get(getNearbyFood);
+
 module.exports = router;
