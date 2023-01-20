@@ -14,10 +14,6 @@ connectDb("addis");
 app.use("/api/v1/food", foodRouter);
 app.use("/api/v1/restaurant", restaurantRouter);
 
-app.get("/api/v1", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.listen(PORT, () => {
   console.log(`> App running ... http://localhost:${PORT}`);
 });
