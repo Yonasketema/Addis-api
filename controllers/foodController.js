@@ -2,10 +2,10 @@ const Food = require("../models/foodModel");
 const Restaurant = require("../models/restaurantModel");
 
 exports.postFood = async (req, res) => {
-  const { name, price, restaurant } = req.body;
+  const { name, price, restaurant, image } = req.body;
 
   try {
-    const food = await Food.create({ name, price, restaurant });
+    const food = await Food.create({ name, price, restaurant, image });
 
     res.status(201).json({
       status: "success",
@@ -47,11 +47,11 @@ exports.getNearbyFood = async (req, res) => {
       {
         $unwind: "$menu",
       },
-      {
-        $match: {
-          "menu.name": foodname,
-        },
-      },
+      // {
+      //   $match: {
+      //     "menu.name": "",
+      //   },
+      // },
     ]);
 
     res.status(200).json({
