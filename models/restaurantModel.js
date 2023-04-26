@@ -14,7 +14,7 @@ const GeoSchema = new Schema({
 
 const restaurantSchema = new Schema(
   {
-    name: {
+    restaurantName: {
       type: String,
       required: [true, "Name field is required"],
     },
