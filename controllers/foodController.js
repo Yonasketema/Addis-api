@@ -2,10 +2,16 @@ const Food = require("../models/foodModel");
 const Restaurant = require("../models/restaurantModel");
 
 exports.postFood = async (req, res) => {
-  const { name, price, restaurant, image } = req.body;
+  const { name, price, restaurant, image, description } = req.body;
 
   try {
-    const food = await Food.create({ name, price, restaurant, image });
+    const food = await Food.create({
+      name,
+      price,
+      restaurant,
+      description,
+      image,
+    });
 
     res.status(201).json({
       status: "success",
@@ -29,8 +35,8 @@ exports.getNearbyFood = async (req, res) => {
       {
         $geoNear: {
           near: { type: "Point", coordinates: [+lat, +log] },
-          distanceField: "dist",
-          maxDistance: 1500,
+          distanceField: "distance",
+          maxDistance: 30000,
           key: "location",
           spherical: true,
         },
@@ -62,6 +68,65 @@ exports.getNearbyFood = async (req, res) => {
     res.status(404).json({
       status: "fial",
       error: error.message,
+    });
+  }
+};
+
+exports.getRestaurantFoods = async (req, res) => {
+  const { restaurant } = req.query;
+
+  console.table({ restaurant });
+
+  try {
+    const foods = await Food.find({
+      restaurant: restaurant,
+    });
+
+    res.status(200).json({
+      status: "success",
+      foods,
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: "fial",
+      error: error.message,
+    });
+  }
+};
+
+exports.updateFood = async (req, res) => {
+  try {
+    const food = await Food.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        food,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
+
+exports.deleteFood = async (req, res) => {
+  try {
+    await Food.findByIdAndDelete(req.params.id);
+
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
     });
   }
 };
