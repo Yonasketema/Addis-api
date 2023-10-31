@@ -1,6 +1,6 @@
 const Restaurant = require("../models/restaurantModel");
 
-exports.postRestaurant = async (req, res) => {
+exports.createRestaurant = async (req, res) => {
   try {
     const restaurant = await Restaurant.create(req.body);
 

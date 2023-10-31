@@ -19,6 +19,17 @@ const restaurantSchema = new Schema(
       required: [true, "Name field is required"],
     },
     location: GeoSchema,
+    logo: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
   },
   {
     toJSON: { virtuals: true },
