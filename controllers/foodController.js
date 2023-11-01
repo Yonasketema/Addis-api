@@ -75,8 +75,6 @@ exports.getNearbyFood = async (req, res) => {
 exports.getRestaurantFoods = async (req, res) => {
   const { restaurant } = req.query;
 
-  console.table({ restaurant });
-
   try {
     const foods = await Food.find({
       restaurant: restaurant,

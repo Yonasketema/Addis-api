@@ -6,7 +6,8 @@ const foodSchema = new Schema({
     type: String,
     required: [true, "Name field is required"],
   },
-  price: String,
+  price: Number,
+  discountPrice: Number,
   restaurant: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Restaurant",
