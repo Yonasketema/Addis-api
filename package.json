@@ -6,11 +6,14 @@
   "author": "yonas ketema",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^6.8.2"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^6.8.2",
+    "validator": "^13.11.0"
   },
-  "scripts":{
-    "start":"nodemon index.js"
+  "scripts": {
+    "start": "nodemon index.js"
   }
-
 }
