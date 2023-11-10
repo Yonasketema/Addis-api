@@ -1,5 +1,6 @@
-const express = require("express");
 require("dotenv").config({ path: ".env" });
+const express = require("express");
+const cors = require("cors");
 
 const connectDb = require("./connect");
 const foodRouter = require("./routes/foodRoute");
@@ -10,6 +11,7 @@ const app = express();
 
 const PORT = 8000;
 
+app.use(cors());
 app.use(express.json());
 
 connectDb("addis");
