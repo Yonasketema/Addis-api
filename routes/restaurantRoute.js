@@ -1,8 +1,13 @@
 const express = require("express");
-const { createRestaurant } = require("../controllers/restaurantController");
+const {
+  createRestaurant,
+  getRestaurantByUserid,
+} = require("../controllers/restaurantController");
+const { protect } = require("../controllers/authControllers");
 
 const router = express.Router();
 
-router.route("/").post(createRestaurant);
+router.route("/").post(protect, createRestaurant);
 
+router.route("/user").get(protect, getRestaurantByUserid);
 module.exports = router;
