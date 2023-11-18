@@ -5,6 +5,7 @@ const GeoSchema = new Schema({
   type: {
     type: String,
     default: "Point",
+    required: true,
   },
   coordinates: {
     type: [Number],
@@ -18,7 +19,15 @@ const restaurantSchema = new Schema(
       type: String,
       required: [true, "Name field is required"],
     },
-    location: GeoSchema,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "you have to signup first"],
+    },
+    location: {
+      type: GeoSchema,
+      required: [true, "location field is required"],
+    },
     logo: {
       type: String,
       required: true,
