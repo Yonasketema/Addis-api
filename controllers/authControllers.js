@@ -24,18 +24,23 @@ exports.signup = async (req, res, next) => {
     return new Error("please provide name, email, password, passwordConfirm !");
   }
 
-  const newUser = await User.create({
+  const user = await User.create({
     name,
     email,
     password,
     passwordConfirm,
   });
 
-  const token = signToken(newUser.id, res);
+  const token = signToken(user.id, res);
 
-  newUser.password = undefined;
+  user.password = undefined;
 
-  res.status(201).json({ token, user: newUser });
+  res.status(201).json({
+    session: {
+      token,
+    },
+    user,
+  });
 };
 
 exports.login = async (req, res) => {
