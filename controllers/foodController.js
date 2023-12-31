@@ -101,9 +101,7 @@ exports.updateFood = async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      data: {
-        food,
-      },
+      food,
     });
   } catch (err) {
     res.status(404).json({
