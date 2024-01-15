@@ -6,6 +6,7 @@ const GeoSchema = new Schema({
     type: String,
     default: "Point",
     required: true,
+    enum:["Point"],
   },
   coordinates: {
     type: [Number],
