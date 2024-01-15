@@ -19,7 +19,7 @@ exports.postFood = async (req, res) => {
     });
   } catch (error) {
     res.status(404).json({
-      status: "fial",
+      status: "fail",
       error: error.message,
     });
   }
@@ -66,7 +66,7 @@ exports.getNearbyFood = async (req, res) => {
     });
   } catch (error) {
     res.status(404).json({
-      status: "fial",
+      status: "fail",
       error: error.message,
     });
   }
@@ -86,7 +86,7 @@ exports.getRestaurantFoods = async (req, res) => {
     });
   } catch (error) {
     res.status(404).json({
-      status: "fial",
+      status: "fail",
       error: error.message,
     });
   }

@@ -27,7 +27,7 @@ exports.createRestaurant = async (req, res) => {
     });
   } catch (error) {
     res.status(404).json({
-      status: "fial",
+      status: "fail",
       error: error.message,
     });
   }
@@ -49,7 +49,7 @@ exports.getRestaurantByUserid = async (req, res) => {
     });
   } catch (error) {
     res.status(404).json({
-      status: "fial",
+      status: "fail",
       error: error.message,
     });
   }
