@@ -3,9 +3,9 @@ const express = require("express");
 const cors = require("cors");
 
 const connectDb = require("./connect");
-const foodRouter = require("./routes/foodRoute");
-const restaurantRouter = require("./routes/restaurantRoute");
-const reviewRouter = require("./routes/foodRoute");
+const foodRouter = require("./routes/foodRoutes");
+const restaurantRouter = require("./routes/restaurantRoutes");
+const reviewRouter = require("./routes/reviewRoutes");
 const userRouter = require("./routes/userRoutes");
 
 const app = express();

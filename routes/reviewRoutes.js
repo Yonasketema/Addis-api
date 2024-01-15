@@ -1,5 +1,5 @@
 const express = require("express");
-const { protect } = require("../controllers/authControllers");
+const { protect } = require("../controllers/authController");
 const { createFoodReview } = require("../controllers/reviewController");
 
 const router = express.Router({ mergeParams: true });

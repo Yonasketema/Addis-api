@@ -3,7 +3,7 @@ const {
   createRestaurant,
   getRestaurantByUserid,
 } = require("../controllers/restaurantController");
-const { protect } = require("../controllers/authControllers");
+const { protect } = require("../controllers/authController");
 
 const router = express.Router();
 
