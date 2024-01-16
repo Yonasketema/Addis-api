@@ -1,6 +1,26 @@
 const Food = require("../models/foodModel");
 const Restaurant = require("../models/restaurantModel");
 
+exports.getAllFoods = async (req, res) => {
+  let filter = {};
+
+  if (req.params.restaurantId) filter = { restaurant: req.params.restaurantId };
+
+  try {
+    const foods = await Food.find(filter);
+
+    res.status(200).json({
+      status: "success",
+      foods,
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      error: error.message,
+    });
+  }
+};
+
 exports.createFood = async (req, res) => {
   const { name, price, restaurant, image, description } = req.body;
 
@@ -59,26 +79,6 @@ exports.getNearbyFood = async (req, res) => {
       //   },
       // },
     ]);
-
-    res.status(200).json({
-      status: "success",
-      foods,
-    });
-  } catch (error) {
-    res.status(404).json({
-      status: "fail",
-      error: error.message,
-    });
-  }
-};
-
-exports.getRestaurantFoods = async (req, res) => {
-  const { restaurant } = req.query;
-
-  try {
-    const foods = await Food.find({
-      restaurant: restaurant,
-    });
 
     res.status(200).json({
       status: "success",
