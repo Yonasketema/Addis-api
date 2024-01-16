@@ -1,7 +1,7 @@
 const Food = require("../models/foodModel");
 const Restaurant = require("../models/restaurantModel");
 
-exports.postFood = async (req, res) => {
+exports.createFood = async (req, res) => {
   const { name, price, restaurant, image, description } = req.body;
 
   try {
