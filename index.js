@@ -17,9 +17,9 @@ app.use(express.json());
 
 connectDb("addis");
 
-app.use("/api/v1/food", foodRouter);
-app.use("/api/v1/restaurant", restaurantRouter);
-app.use("/api/v1/review", reviewRouter);
+app.use("/api/v1/foods", foodRouter);
+app.use("/api/v1/restaurants", restaurantRouter);
+app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/users", userRouter);
 
 app.listen(PORT, () => {
