@@ -18,54 +18,76 @@ const signToken = (id, res) => {
 };
 
 exports.signup = async (req, res, next) => {
-  const { name, email, password, passwordConfirm } = req.body;
+  try {
+    const { name, email, password, passwordConfirm } = req.body;
 
-  if (!name || !email || !password || !passwordConfirm) {
-    return new Error("please provide name, email, password, passwordConfirm !");
+    if (!name || !email || !password || !passwordConfirm) {
+      throw new Error(
+        "please provide name, email, password, passwordConfirm !"
+      );
+    }
+
+    if (await User.findOne({ email })) {
+      throw new Error(
+        "please your email address is already register try with different email address!"
+      );
+    }
+
+    const user = await User.create({
+      name,
+      email,
+      password,
+      passwordConfirm,
+    });
+
+    const token = signToken(user.id, res);
+
+    user.password = undefined;
+
+    res.status(201).json({
+      session: {
+        token,
+      },
+      user,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
   }
-
-  const user = await User.create({
-    name,
-    email,
-    password,
-    passwordConfirm,
-  });
-
-  const token = signToken(user.id, res);
-
-  user.password = undefined;
-
-  res.status(201).json({
-    session: {
-      token,
-    },
-    user,
-  });
 };
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    return new Error("please provide email and password!");
+    if (!email || !password) {
+      throw new Error("please provide email and password!");
+    }
+
+    const user = await User.findOne({ email }).select("+password");
+
+    if (!user || !(await user.isPasswordCorrect(password, user.password))) {
+      throw new Error("Incorrect email or password");
+    }
+
+    const token = signToken(user.id, res);
+
+    user.password = undefined;
+
+    res.status(201).json({
+      session: {
+        token,
+      },
+      user,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
   }
-
-  const user = await User.findOne({ email }).select("+password");
-
-  if (!user || !(await user.isPasswordCorrect(password, user.password))) {
-    return new Error("Incorrect email or password");
-  }
-
-  const token = signToken(user.id, res);
-
-  user.password = undefined;
-
-  res.status(201).json({
-    session: {
-      token,
-    },
-    user,
-  });
 };
 
 exports.protect = async (req, res, next) => {
