@@ -22,6 +22,18 @@ app.use("/api/v1/restaurants", restaurantRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/users", userRouter);
 
+app.all("*", (req, res, next) => {
+  next(new Error(`Can't find ${req.originalUrl} on this server`));
+});
+
+//Global error handler
+app.use((error, req, res, next) => {
+  res.status(404).json({
+    status: "fail",
+    message: error.message,
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`> App running ... http://localhost:${PORT}`);
 });
