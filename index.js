@@ -1,5 +1,7 @@
 require("dotenv").config({ path: ".env" });
 const express = require("express");
+const compression = require("compression");
+
 const cors = require("cors");
 
 const connectDb = require("./connect");
@@ -9,13 +11,21 @@ const reviewRouter = require("./routes/reviewRoutes");
 const userRouter = require("./routes/userRoutes");
 
 const app = express();
-
 const PORT = 8000;
 
+const RateLimit = require("express-rate-limit");
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 20,
+});
+
+app.use(limiter);
 app.use(cors());
 app.use(express.json());
 
 connectDb("addis");
+
+app.use(compression());
 
 app.use("/api/v1/foods", foodRouter);
 app.use("/api/v1/restaurants", restaurantRouter);
@@ -34,6 +44,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`> App running ... http://localhost:${PORT}`);
 });
