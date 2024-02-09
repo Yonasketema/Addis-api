@@ -11,7 +11,7 @@ const reviewRouter = require("./routes/reviewRoutes");
 const userRouter = require("./routes/userRoutes");
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 const RateLimit = require("express-rate-limit");
 const limiter = RateLimit({
@@ -23,7 +23,7 @@ app.use(limiter);
 app.use(cors());
 app.use(express.json());
 
-connectDb("addis");
+connectDb();
 
 app.use(compression());
 
@@ -44,6 +44,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(process.env.PORT || PORT, () => {
+app.listen(PORT, () => {
   console.log(`> App running ... http://localhost:${PORT}`);
 });
