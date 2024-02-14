@@ -6,7 +6,7 @@ const GeoSchema = new Schema({
     type: String,
     default: "Point",
     required: true,
-    enum:["Point"],
+    enum: ["Point"],
   },
   coordinates: {
     type: [Number],
@@ -47,7 +47,7 @@ const restaurantSchema = new Schema(
   }
 );
 
-// restaurantSchema.createIndex({ location: "2dsphere" });
+restaurantSchema.createIndex({ location: "2dsphere" });
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
