@@ -47,7 +47,7 @@ const restaurantSchema = new Schema(
   }
 );
 
-restaurantSchema.createIndex({ location: "2dsphere" });
+restaurantSchema.index({ location: "2dsphere" });
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
