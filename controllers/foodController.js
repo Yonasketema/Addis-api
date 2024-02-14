@@ -54,7 +54,7 @@ exports.getNearbyFood = async (req, res) => {
     const foods = await Restaurant.aggregate([
       {
         $geoNear: {
-          near: { type: "Point", coordinates: [+lat, +log] },
+          near: { type: "Point", coordinates: [+log, +lat] },
           distanceField: "distance",
           maxDistance: 30000,
           key: "location",
